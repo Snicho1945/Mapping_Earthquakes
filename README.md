@@ -8,3 +8,4 @@ Using Mapbox, data from the USGS(https://earthquake.usgs.gov/earthquakes/feed/v1
 create a moderately interactive map with different styles of maps. I'll let the data speak for itself.
 
 The finished project is in the Earthquake_Challenge folder.
+Note: While most scales are a gradient of a color, I am colorblind and require colors that don't look the same. That is the reason for the color choices.
