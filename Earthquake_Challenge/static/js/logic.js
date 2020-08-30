@@ -148,6 +148,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 });
 
 // Retrieve the tectonic GeoJSON data.
+//https://github.com/fraxen/tectonicplates
 d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
   // Creating a GeoJSON layer with the retrieved data.
   L.geoJson(data, {
