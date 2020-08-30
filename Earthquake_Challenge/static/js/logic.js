@@ -63,12 +63,12 @@ legend.onAdd = function() {
   let div = L.DomUtil.create("div", "info legend");
     const magnitudes = [0, 1, 2, 3, 4, 5];
     const colors = [
-      "#98ee00",
-      "#d4ee00",
-      "#eecc00",
-      "#ee9c00",
-      "#ea822c",
-      "#ea2c2c"
+      "#57e84d",
+      "#ba91ff",
+      "#e602cf",
+      "#1d02e6",
+      "#bfc900",
+      "#5c0000"
     ];
   // Looping through our intervals to generate a label with a colored square for each interval.
   for (var i = 0; i < magnitudes.length; i++) {
@@ -102,21 +102,21 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   // This function determines the color of the circle based on the magnitude of the earthquake.
   function getColor(magnitude) {
     if (magnitude > 5) {
-      return "#ea2c2c";
+      return "#5c0000";
     }
     if (magnitude > 4) {
-      return "#ea822c";
+      return "#bfc900";
     }
     if (magnitude > 3) {
-      return "#ee9c00";
+      return "#1d02e6";
     }
     if (magnitude > 2) {
-      return "#eecc00";
+      return "#e602cf";
     }
     if (magnitude > 1) {
-      return "#d4ee00";
+      return "#ba91ff";
     }
-    return "#98ee00";
+    return "#57e84d";
   }
 
   // This function determines the radius of the earthquake marker based on its magnitude.
