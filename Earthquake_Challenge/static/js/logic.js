@@ -6,26 +6,35 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/t
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         accessToken: API_KEY
-    });
+});
 
-// We create the dark view tile layer that will be an option for our map.
+// We create the satallite view tile layer that will be an option for our map.
 let satstreet = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         accessToken: API_KEY
-    });
+});
 
-    // Create a base layer that holds both maps.
+// We create the light view tile layer that will be an option for our map.
+let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        accessToken: API_KEY
+});
+
+
+// Create a base layer that holds both maps.
 let baseMaps = {
   Streets: streets,
-  SatStreet: satstreet
+  SatStreet: satstreet,
+  Light: light
 };
 
 // Create the earthquake layer for our map.
 let earthquakes = new L.layerGroup();
 
-// tectoncis layer
-let tectoncis = new L.layerGroup();
+// tectonics layer
+let tectonics = new L.layerGroup();
 
 // We define an object that contains the overlays.
 // This overlay will be visible all the time.
@@ -119,7 +128,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     return magnitude * 4;
   }
   // Creating a GeoJSON layer with the retrieved data.
-// Creating a GeoJSON layer with the retrieved data.
   L.geoJson(data, {
     // We turn each feature into a circleMarker on the map.
     pointToLayer: function(feature, latlng) {
@@ -135,12 +143,17 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   }
   }).addTo(earthquakes);
 
-  // add the earthquake layer to map
+  
   earthquakes.addTo(map);
 });
 
-// Retrieve the earthquake GeoJSON data.
+// Retrieve the tectonic GeoJSON data.
 d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJson(data).addTo(map);
+  L.geoJson(data, {
+    color: "#783571"
+  }).addTo(tectonics);
+
+  // add the tectonics layer to map
+  tectonics.addTo(map);
 });
